@@ -6,15 +6,15 @@ Hello!
 
 This is a Work In Progress of a GraphsIO.jl rewrite! The plan is to be compatible with Julia 1.6 and above.
 
-The plans are:
+The plans are, in order:
  
-[] Support all preexisting formats
-[] Formalize the testing structure
-[] Make it idiomatic Julia
-[] Use Parsers.jl + Mmapping as a backend
-[] Use artifacts for downloading graphs
-[] (Dream feature) Make it multithreaded
-[] (Dream feature) Post benchmarks
+- [] Formalize the testing structure
+- [] Make it idiomatic Julia
+- [] Use Parsers.jl + Mmapping as a backend
+- [] Support all preexisting formats
+- [] Use artifacts for downloading graphs
+- [] (Dream feature) Make it multithreaded
+- [] (Dream feature) Post benchmarks
 
 You are more than encourage to help out and / or reach out.
 
