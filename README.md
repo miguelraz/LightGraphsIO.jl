@@ -1,33 +1,37 @@
-# LightGraphsIO 
+# LightGraphsIO.jl (is under construction! :pick:
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://miguelraz.github.io/LightGraphsIO.jl/stable) [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://miguelraz.github.io/LightGraphsIO.jl/dev) [![Build Status](https://github.com/miguelraz/LightGraphsIO.jl/workflows/CI/badge.svg)](https://github.com/miguelraz/LightGraphsIO.jl/actions) 
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/miguelraz/LightGraphsIO.jl?svg=true)](https://ci.appveyor.com/project/miguelraz/LightGraphsIO-jl) [![Coverage](https://codecov.io/gh/miguelraz/LightGraphsIO.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/miguelraz/LightGraphsIO.jl) [![Coverage](https://coveralls.io/repos/github/miguelraz/LightGraphsIO.jl/badge.svg?branch=master)](https://coveralls.io/github/miguelraz/LightGraphsIO.jl?branch=master) [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 
 Hello! 
 
 #### Table of Contents
-1. What does LightGraphsIO.jl do?
-2. How can I get it / use it?
-3. What are its features?
-4. Where can I get help?
-5. Who maintains this project?
-6. How can I help this project?
+* [What does LightGraphsIO.jl do?](https://github.com/miguelraz/LightGraphsIO.jl#what-does-lightgraphsiojl-do)
+* [How can I get it / use it?](https://github.com/miguelraz/LightGraphsIO.jl#how-can-i-use-it)
+* [What are its features?](https://github.com/miguelraz/LightGraphsIO.jl#what-are-its-features--benefits)
+* [Where can I get help?](https://github.com/miguelraz/LightGraphsIO.jl#where-can-i-get-help-with-this-project)
+* [Who maintains this project?](https://github.com/miguelraz/LightGraphsIO.jl#who-maintains--contributes-to-this-project)
+* [Benchmarks](https://github.com/miguelraz/LightGraphsIO.jl#benchmarks)
+* [How can I help this project?](https://github.com/miguelraz/LightGraphsIO.jl#how-can-i-help-this-project)
 
-### What does LightGraphsIO.jl do?
+### What does LightGraphsIO.jl do? :woman-shrugging:
 
 This is a package to read and write popular graph formats in a performant fashion (i.e., it should NOT choke on your average dataset.)
 
 This is a Work In Progress of a GraphsIO.jl rewrite! The plan is to be compatible with Julia 1.6 and above. This repo thanks the authors of GraphsIO.jl as most of the heavy lifting was already done there.
 
-### [How can I use it?]()
+This will hopefully be a part of the [LightGraphs.jl]() ecosystem.
+
+### How can I use it? :bulb:
 
 Download Julia and open up a REPL. Then, type
+
 ```julia
 using Pkg
 Pkg.add("LightGraphsIO")
 loadgraph("mygraph.dot", DOTFormat)
 ```
 
-### [What are its features / benefits?]()
+### What are its features / benefits? :clipboard:
 
 The plans are, in order:
  
@@ -40,51 +44,83 @@ The plans are, in order:
 
 Currently, the following functionality is provided:V
 
-Format        | Read | Write | Multiple Graphs| Format Name  |
---------------|------|-------|----------------|--------------|
-[EdgeList]    |   x  |  x    | x              |EdgeListFormat|
-[GML]         |   x  |  x    | x              |GMLFormat     |
-[Graph6]      |   x  |  x    | x              |Graph6Format  |
-[GraphML]     |   x  |  x    | x              |GraphMLFormat |
-[Pajek NET]   |   x  |  x    | x              |NETFormat     |
-[GEXF]        |   x  |  x    | x              |GEXFFormat    |
-[DOT]         |   x  |  x    | x              |DOTFormat     |
-[CDF]         |   x  |  x    | x              |CDFFormat     |
-[LGCompressed]|   x  |  x    | x              |LGCompressed|
+| *Format*     | *Read* | *Write* | *Parallel read* | *Parallel write* | *Multiple Graphs* | *Format Name*    |
+|--------------|------|-------|---------------|----------------|-----------------|----------------|
+| EdgeList     |      |       |               |                |                 | EdgeListFormat |
+| DOT          |      |       |               |                |                 | DOTFormat      |
+| GML          |      |       |               |                |                 | GMLFormat      |
+| Graph6       |      |       |               |                |                 | Graph6Format   |
+| GraphML      |      |       |               |                |                 | GraphMLFormat  |
+| Pajek NET    |      |       |               |                |                 | NETFormat      |
+| GEXF         |      |       |               |                |                 | GEXFFormat     |
+| CDF          |      |       |               |                |                 | CDFFormat      |
+| LGCompressed |      |       |               |                |                 | LGCompressed   |
 
-[EdgeList]: a simple list of sources and dests separated by whitespace and/or comma, one pair per line.
 
-[GML]: https://en.wikipedia.org/wiki/Graph_Modelling_Language
 
-[Graph6]: https://users.cecs.anu.edu.au/~bdm/data/formats.html
+[EdgeList](http://rosalind.info/glossary/algo-edge-list-format/#:~:text=The%20first%20line%20contains%20two,as%20weighted%20and%20unweighted%20graphs.): a simple list of sources and dests separated by whitespace and/or comma, one pair per line.
 
-[GraphML]: https://en.wikipedia.org/wiki/GraphML
+* Example **Edge list** file below, [code to parse it is here:](Link to parsing code here)
 
-[Pajek NET]: https://gephi.org/users/supported-graph-formats/pajek-net-format/
+```
+1 2
+2 3
+3 5
+```
 
-[GEXF]: https://gephi.org/gexf/format/
+[DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) : Simplistic di/graph format with minimal syntax.
 
-[DOT]: https://en.wikipedia.org/wiki/DOT_(graph_description_language)
+* Example below, [code linked here]()
+
+```
+graph {
+1 -- 2
+2 -- 3
+3 -- 5
+}
+```
+
+
+[GML](https://en.wikipedia.org/wiki/Graph_Modelling_Language).
+
+[Graph6](https://users.cecs.anu.edu.au/~bdm/data/formats.html)
+
+[GraphML](https://en.wikipedia.org/wiki/GraphML)
+
+[Pajek NET](https://gephi.org/users/supported-graph-formats/pajek-net-format/)
+
+[GEXF](https://gephi.org/gexf/format/)
+
+[CDF]() ???
+
+LightGraphs Compressed format: Binary format for quick saving/reading.
+
 
 [LGCompressed]: Compressed LightGraphs format.
 
-Stretch goals for this project are in order:
+##### Stretch goals for this project are, in order:
 
 - [ ] Use artifacts for downloading graphs (?)
-- [ ] Use SIMD
 - [ ] Parse formats + features (more than nodes and edges)
+- [ ] Use SIMD
 
-### [Where can I get help with this project?]()
+### Where can I get help with this project? :ambulance:
 
-Try using the #graphs channel in the Julia Slack/Zulip or post about it on the JuliaLang Discourse.
+Try using the #graphs channel in the [Julia Slack]() or [Zulip]() or post about it on the JuliaLang Discourse. Try asking there or the #helpdesk channels.
 
-### [Who maintains / contributes to this project?]()
+If you need emergency assistance or contractual support, get in touch via email.
+
+### Who maintains / contributes to this project? :handshake:
 
 @miguelraz (wanna fund me for a Master's / PhD? Get in touch!)
 
-### [How can I help this project?]()
+### Benchmarks
 
-Click the Sponsor button or subscribe to the Patreon!
+Plots! Lines! Competition! Soon! :tm:
+
+### How can I help this project? :muscle:
+
+Click the [Sponsor]() button or subscribe to the [Patreon]()!
 
 You are more than encouraged to help out and / or reach out.
 
