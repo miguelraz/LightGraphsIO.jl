@@ -1,5 +1,6 @@
 module LightGraphsIO
 
+
 using LightGraphs
 using Parsers
 
@@ -21,31 +22,90 @@ function write_file(io, file_name)
 end
 
 ################ DOT
+
+"""
+    load_graph(file, ::Type{DOTFormat}) -> Union{SimpleGraph, SimpleDiGraph}
+
+    Parses and produces a `file` written in the `DOTFormat`. 
+    CAVEAT:
+    * Parses simple directed and undirected graphs.
+    * Assumes 1 graph per file (for now)
+    * Please sponsor/PR/file issues for more parsing support.
+
+    # Arguments
+    # - `file`: the file were the graph is written
+    # - `DOTFormat`: DOT graph format
+    #
+    # # Returns
+    # - `g`: a simple un/directed LightGraphs.jl graph
+"""
 function load_graph(file, ::Type{DOTFormat})
-    1
+    if occursin("digraph", readline(file))
+        _load_graph(SimpleDiGraph(0), DOTFormat, file)
+    else
+        _load_graph(SimpleGraph(0), DOTFormat, file)
+    end
+    return nothing    
 end
 
-function write_graph(g, ::Type{DOTFormat}, file_name="graph.dot", graph_name="")
+### Jacob Says:
+# I'd be happy to talk through things. It sounds like Parsers.jl (https://github.com/JuliaData/Parsers.jl)
+# could be helpful, though I know it can be a bit intimidating to dive into.
+#
+# Basically you can create a Parsers.Options with the config you want (e.g. delim='\t', comment="#" )
+# then you would call Parsers.xparse , which is the internal (yet part of the public API)
+# method that Parsers.parse and Parsers.tryparse call. 
+#
+# For best performance, I'd recommend Mmap.mmap(file) you get a Vector{UInt8}, then pass that to xparse .
+# You can see an example of how CSV.jl uses xparse directly for parsing column names from a file:
+# https://github.com/JuliaData/CSV.jl/blob/master/src/detection.jl#L231.
+#
+# Anyway, that's probably enough to get started, but happy to chat if something doesn't make sense.
+
+### Jacob also says
+# One last thing that's probably helpful; xparse won't throw any errors (by design),
+# but you get back a code return value.
+#
+# It's a bitmask of basically everything that happened while parsing and whether it ran into problems or whatnot.
+#
+# The documented codes are here:
+# https://github.com/JuliaData/Parsers.jl/blob/ab5ef1bbdc81fe8ee979a5b287ea065d991ba0ce/src/utils.jl#L44.
+#
+# In particular, you can check Parsers.newline(code) to see if a newline was encountered while parsing
+# to know if you hit the end of the line.
+
+
+function _load_graph(g::SimpleGraph, ::Type{DOTFormat}, file)
+    # 1. Create a Parsers.Options with the right presets
+    # 2. Mmap the file (Mmap.mmap(file)) to get a Vector{UInt8}
+    # 3. Pass that to Parsers.xparse
+    # 4. Throw errors appropriately with the returned bytecode value
+    return nothing 
+end
+
+function _load_graph(g::SimpleDiGraph, ::Type{DOTFormat}, file)
+    return nothing
+end
+
+function write_graph(g::SimpleGraph, ::Type{DOTFormat}, file_name="graph.dot", graph_name="")
     io = IOBuffer()
-    is_dir = is_directed(g)
-    graph_type = is_dir ? "digraph " : "graph "
-    name_and_end = graph_name == "" ? '{' : string(graph_name, " {")
-    println(io, graph_type, name_and_end)
-    #for i in vertices(g)
-    #     println(io, '\t', i)
-    #end
-    if is_dir
-        for v in vertices(g)
-            out_nbrs = outneighbors(g, v)
-            length(out_nbrs) == 0 && continue
-            println(io, '\t', string(v), " -> {", join(out_nbrs, ','), '}')
-        end
-    else
-        for e in edges(g)
-            source = string(src(e))
-            dest = string(dst(e))
-            println(io, '\t', source, " -- ", dest)
-        end
+    println(io, "graph ", graph_name == "" ? '{' : string(graph_name, " {"))
+    for e in edges(g)
+        source = string(src(e))
+        dest = string(dst(e))
+        println(io, '\t', source, " -- ", dest)
+    end
+    write(io, '}')
+    write_file(io, file_name)
+end
+    
+function write_graph(g::SimpleDiGraph, ::Type{DOTFormat}, file_name="digraph.dot", graph_name="")
+    io = IOBuffer()
+    println(io, "digraph ", graph_name == "" ? '{' : string(graph_name, " {"))
+    for v in vertices(g)
+        out_nbrs = outneighbors(g, v)
+        length(out_nbrs) == 0 && continue
+        println(io, '\t', string(v), " -> {", join(out_nbrs, ','), '}')
     end
     write(io, '}')
     write_file(io, file_name)
