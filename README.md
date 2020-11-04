@@ -5,30 +5,31 @@
 Hello! 
 
 #### Table of Contents
-* [What does LightGraphsIO.jl do?](https://github.com/miguelraz/LightGraphsIO.jl#what-does-lightgraphsiojl-do)
-* [How can I get it / use it?](https://github.com/miguelraz/LightGraphsIO.jl#how-can-i-use-it)
-* [What are its features?](https://github.com/miguelraz/LightGraphsIO.jl#what-are-its-features--benefits)
-* [Where can I get help?](https://github.com/miguelraz/LightGraphsIO.jl#where-can-i-get-help-with-this-project)
+* [What does LightGraphsIO.jl do?](https://github.com/miguelraz/LightGraphsIO.jl#what-does-lightgraphsiojl-do-shrug)
+* [How can I get it / use it?](https://github.com/miguelraz/LightGraphsIO.jl#how-can-i-use-it-bulb)
+* [What are its features?](https://github.com/miguelraz/LightGraphsIO.jl#what-are-its-features--benefits-clipboard)
+* [Where can I get help?](https://github.com/miguelraz/LightGraphsIO.jl#where-can-i-get-help-with-this-project-ambulance)
 * [Who maintains this project?](https://github.com/miguelraz/LightGraphsIO.jl#who-maintains--contributes-to-this-project)
-* [Benchmarks](https://github.com/miguelraz/LightGraphsIO.jl#benchmarks)
-* [How can I help this project?](https://github.com/miguelraz/LightGraphsIO.jl#how-can-i-help-this-project)
+* [Benchmarks](https://github.com/miguelraz/LightGraphsIO.jl#benchmarks-bar_chart)
+* [How can I help this project?](https://github.com/miguelraz/LightGraphsIO.jl#how-can-i-help-this-project-muscle)
 
-### What does LightGraphsIO.jl do? :woman-shrugging:
+### What does LightGraphsIO.jl do? :shrug:
 
 This is a package to read and write popular graph formats in a performant fashion (i.e., it should NOT choke on your average dataset.)
 
 This is a Work In Progress of a GraphsIO.jl rewrite! The plan is to be compatible with Julia 1.6 and above. This repo thanks the authors of GraphsIO.jl as most of the heavy lifting was already done there.
 
-This will hopefully be a part of the [LightGraphs.jl]() ecosystem.
+This will hopefully be a part of the [JuliaGraphs](https://juliagraphs.org/) ecosystem.
 
 ### How can I use it? :bulb:
 
 Download Julia and open up a REPL. Then, type
 
 ```julia
-using Pkg
-Pkg.add("LightGraphsIO")
-loadgraph("mygraph.dot", DOTFormat)
+julia> using Pkg
+julia> Pkg.add(["LightGraphsIO", "LightGraphs"]) # install the packages
+julia> using LightGraphs, LightGraphsIO          # load the libraries
+julia> g = loadgraph("mygraph.dot", DOTFormat)   # read the files, put into a graph
 ```
 
 ### What are its features / benefits? :clipboard:
@@ -74,9 +75,9 @@ Currently, the following functionality is provided:V
 
 ```
 graph {
-1 -- 2
-2 -- 3
-3 -- 5
+1 -> 2
+2 -> {3,4}
+3 -> 5
 }
 ```
 
@@ -93,10 +94,7 @@ graph {
 
 [CDF]() ???
 
-LightGraphs Compressed format: Binary format for quick saving/reading.
-
-
-[LGCompressed]: Compressed LightGraphs format.
+[LightGraphs Compressed]() format: Binary format for quick saving/reading with Gzip.
 
 ##### Stretch goals for this project are, in order:
 
@@ -114,13 +112,13 @@ If you need emergency assistance or contractual support, get in touch via email.
 
 @miguelraz (wanna fund me for a Master's / PhD? Get in touch!)
 
-### Benchmarks
+### Benchmarks :bar_chart:
 
 Plots! Lines! Competition! Soon! :tm:
 
 ### How can I help this project? :muscle:
 
-Click the [Sponsor]() button or subscribe to the [Patreon]()!
+Click the [**Sponsor**](https://github.com/sponsors/miguelraz) button at the top right or subscribe to the [Patreon](https://patreon.com/BrainRPG)!
 
 You are more than encouraged to help out and / or reach out.
 
