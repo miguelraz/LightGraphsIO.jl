@@ -2,33 +2,32 @@
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://miguelraz.github.io/LightGraphsIO.jl/stable) [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://miguelraz.github.io/LightGraphsIO.jl/dev) [![Build Status](https://github.com/miguelraz/LightGraphsIO.jl/workflows/CI/badge.svg)](https://github.com/miguelraz/LightGraphsIO.jl/actions) 
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/miguelraz/LightGraphsIO.jl?svg=true)](https://ci.appveyor.com/project/miguelraz/LightGraphsIO-jl) [![Coverage](https://codecov.io/gh/miguelraz/LightGraphsIO.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/miguelraz/LightGraphsIO.jl) [![Coverage](https://coveralls.io/repos/github/miguelraz/LightGraphsIO.jl/badge.svg?branch=master)](https://coveralls.io/github/miguelraz/LightGraphsIO.jl?branch=master) [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 
-Hello! 
-
 #### Table of Contents
-* [What does LightGraphsIO.jl do?](https://github.com/miguelraz/LightGraphsIO.jl#what-does-lightgraphsiojl-do)
-* [How can I get it / use it?](https://github.com/miguelraz/LightGraphsIO.jl#how-can-i-use-it)
-* [What are its features?](https://github.com/miguelraz/LightGraphsIO.jl#what-are-its-features--benefits)
-* [Where can I get help?](https://github.com/miguelraz/LightGraphsIO.jl#where-can-i-get-help-with-this-project)
-* [Who maintains this project?](https://github.com/miguelraz/LightGraphsIO.jl#who-maintains--contributes-to-this-project)
-* [Benchmarks](https://github.com/miguelraz/LightGraphsIO.jl#benchmarks)
-* [How can I help this project?](https://github.com/miguelraz/LightGraphsIO.jl#how-can-i-help-this-project)
+* [What does LightGraphsIO.jl do?](https://github.com/miguelraz/LightGraphsIO.jl#what-does-lightgraphsiojl-do-woman-shrugging)
+* [How can I get it / use it?](https://github.com/miguelraz/LightGraphsIO.jl#how-can-i-use-it-bulb)
+* [What are its features?](https://github.com/miguelraz/LightGraphsIO.jl#what-are-its-features--benefits-clipboard)
+* [Where can I get help?](https://github.com/miguelraz/LightGraphsIO.jl#where-can-i-get-help-with-this-project-ambulance)
+* [Who maintains this project?](https://github.com/miguelraz/LightGraphsIO.jl#who-maintains--contributes-to-this-project-handshake)
+* [Benchmarks](https://github.com/miguelraz/LightGraphsIO.jl#benchmarks-chart)
+* [How can I help this project?](https://github.com/miguelraz/LightGraphsIO.jl#how-can-i-help-this-project-muscle)
 
-### What does LightGraphsIO.jl do? :woman-shrugging:
+### What does LightGraphsIO.jl do? :shrug:
 
 This is a package to read and write popular graph formats in a performant fashion (i.e., it should NOT choke on your average dataset.)
 
-This is a Work In Progress of a GraphsIO.jl rewrite! The plan is to be compatible with Julia 1.6 and above. This repo thanks the authors of GraphsIO.jl as most of the heavy lifting was already done there.
+This is a Work In Progress of a [GraphsIO.jl](https://github.com/JuliaGraphs/GraphIO.jl) rewrite! The plan is to be compatible with Julia 1.6 and above. This repo thanks the authors of GraphsIO.jl as most of the heavy lifting was already done there.
 
-This will hopefully be a part of the [LightGraphs.jl]() ecosystem.
+This will hopefully be a part of the [LightGraphs.jl](https://github.com/JuliaGraphs/LightGraphs.jl) ecosySTEM.
 
 ### How can I use it? :bulb:
 
 Download Julia and open up a REPL. Then, type
 
 ```julia
-using Pkg
-Pkg.add("LightGraphsIO")
-loadgraph("mygraph.dot", DOTFormat)
+julia> using Pkg;                                   
+julia> Pkg.add(["LightGraphsIO", "LightGraphs"]); # install the packages
+julia> using LightGraphs, LightGraphsIO           # import the libraries
+julia> g = loadgraph("mygraph.dot", DOTFormat)    # read the file
 ```
 
 ### What are its features / benefits? :clipboard:
@@ -36,7 +35,7 @@ loadgraph("mygraph.dot", DOTFormat)
 The plans are, in order:
  
 - [ ] Have a formal and extensive testing structure
-- [ ] Written in idiomatic, fully documented idiomatic Julia
+- [ ] Written in idiomatic, fully documented Julia
 - [ ] Use Parsers.jl + Mmapping as a backend
 - [ ] Support all preexisting simple formats (nodes and edges only, see chart below)
 - [ ] Post benchmarks
@@ -95,9 +94,6 @@ graph {
 
 LightGraphs Compressed format: Binary format for quick saving/reading.
 
-
-[LGCompressed]: Compressed LightGraphs format.
-
 ##### Stretch goals for this project are, in order:
 
 - [ ] Use artifacts for downloading graphs (?)
@@ -106,7 +102,7 @@ LightGraphs Compressed format: Binary format for quick saving/reading.
 
 ### Where can I get help with this project? :ambulance:
 
-Try using the #graphs channel in the [Julia Slack]() or [Zulip]() or post about it on the JuliaLang Discourse. Try asking there or the #helpdesk channels.
+Try using the #graphs channel in the [Julia Slack](https://join.slack.com/t/julialang/shared_invite/zt-ij3rdwdu-9bY~Bwai4gN2YWFzbLZOZQ) or [Zulip](https://julialang.zulipchat.com/) or post about it on the JuliaLang [Discourse](https://discourse.julialang.org/). Try asking there or the #helpdesk channels.
 
 If you need emergency assistance or contractual support, get in touch via email.
 
